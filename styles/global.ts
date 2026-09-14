@@ -1,7 +1,8 @@
+import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
 import { StyleSheet } from "react-native";
 
 export const colors = {
-  background: " #FFF9F5",
+  background: "#FFF9F5",
   header: "#242444",
   surface: "#2a2a4a",
   primary: "#4fc3f7",
@@ -14,14 +15,11 @@ export const globalStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    paddingTop: 60,
+    paddingTop: 70,
     paddingHorizontal: 20,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
     color: colors.text,
   },
+
   sectionTitle: {
     fontSize: 18,
     fontWeight: "600",

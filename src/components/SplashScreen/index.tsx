@@ -19,7 +19,10 @@ import {
   LOGO_WIDTH,
 } from "./constants";
 
-export default function SplashScreen() {
+interface Props {
+  onFinish: () => void;
+}
+export default function SplashScreen({ onFinish }: Props) {
   const { width } = useWindowDimensions();
 
   // breakpoints
@@ -58,12 +61,10 @@ export default function SplashScreen() {
   const styles = useStyles(animations);
 
   useEffect(() => {
-    const runAnimation = async () => {
-      await animations.start();
-      router.push("/welcomeScreen");
-    };
+    animations.start();
 
-    runAnimation();
+    const timer = setTimeout(onFinish, 7000);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
