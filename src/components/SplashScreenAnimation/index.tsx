@@ -6,9 +6,6 @@ import { useEffect } from "react";
 import { useWindowDimensions, View } from "react-native";
 import Animated from "react-native-reanimated";
 
-import { router } from "expo-router";
-import { useAnimations } from "../SplashScreen/useAnimation";
-import { useStyles } from "../SplashScreen/useStyle";
 import {
   CIRCLE_COLORS,
   GRADIENT_COLORS,
@@ -18,6 +15,8 @@ import {
   LOGO_HEIGHT,
   LOGO_WIDTH,
 } from "./constants";
+import { useAnimations } from "./useAnimation";
+import { useStyles } from "./useStyle";
 
 interface Props {
   onFinish: () => void;

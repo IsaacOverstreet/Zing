@@ -1,5 +1,5 @@
 import { useAnimatedStyle } from "react-native-reanimated";
-import { useAnimations } from "../SplashScreen/useAnimation";
+import { useAnimations } from "./useAnimation";
 
 export function useStyles(animations: ReturnType<typeof useAnimations>) {
   const {

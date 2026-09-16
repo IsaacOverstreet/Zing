@@ -1,8 +1,11 @@
+import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
-import { useState } from "react";
-import SplashScreen from "../components/SplashScreen";
-import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect, useState } from "react";
+import SplashScreenAnimation from "../components/SplashScreenAnimation";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [isReady, setIsReady] = useState(false);
@@ -14,8 +17,14 @@ export default function RootLayout() {
     [fontFamily.bold]: require("../../assets/fonts/Lufga-Bold.otf"),
   });
 
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
   if (!fontsLoaded || !isReady) {
-    return <SplashScreen onFinish={() => setIsReady(true)} />;
+    return <SplashScreenAnimation onFinish={() => setIsReady(true)} />;
   }
 
   return (
