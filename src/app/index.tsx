@@ -1,33 +1,26 @@
-import { globalStyles } from "@/styles/global";
-import { Image, Pressable, StatusBar, Text, View } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 
 import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
 import loginImage from "@/assets/images/loginImage.png";
+import { router } from "expo-router";
+import LoginContainer from "../components/loginContainer";
 
 export default function WelcomeScreen() {
   return (
-    <View className="flex-1 bg-[#F6F3F1] ">
-      <StatusBar barStyle="dark-content" backgroundColor="#F6F3F1" />
-
+    <LoginContainer>
+      {/* Main Card */}
       <View
-        className="flex-1 items-center justify-center"
-        style={globalStyles.container}
+        className="
+                w-full
+                max-w-[820px]
+                bg-[#FFF9F6]
+                md:rounded-[48px] border border-blue-400
+                 gap-[38px] md:gap-[48px] lg:gap-[56px]
+              "
       >
-        {/* Main Card */}
-        <View
+        <Text
+          style={{ fontFamily: fontFamily.semiBold }}
           className="
-            w-full
-            max-w-[820px]
-            bg-[#FFF9F6]
-            md:rounded-[48px]
-            border border-black
-             gap-[38px] md:gap-[48px] lg:gap-[56px]
-          "
-        >
-          {/* Title */}
-          <Text
-            style={{ fontFamily: fontFamily.semiBold }}
-            className="
                 text-center
                 text-[24px]
                 tracking-[-3%]
@@ -35,32 +28,32 @@ export default function WelcomeScreen() {
                 md:text-[36px]
            
               "
-          >
-            Welcome! Let’s get started
-          </Text>
+        >
+          Welcome! Let’s get started
+        </Text>
 
-          {/* Illustration + Description */}
-          <View className="gap-[24px] mt-[20px]">
-            <View
-              className=" 
+        {/* Illustration + Description */}
+        <View className="gap-[24px] mt-[20px]">
+          <View
+            className=" 
                 w-full
                 overflow-hidden
                
               "
-            >
-              <Image
-                source={loginImage}
-                className="w-full rounded-b-[20px] h-[300px]
+          >
+            <Image
+              source={loginImage}
+              className="w-full rounded-b-[20px] h-[300px]
     sm:h-[350px]
     md:h-[450px]
     lg:h-[550px]"
-                resizeMode="cover"
-              />
-            </View>
+              resizeMode="cover"
+            />
+          </View>
 
-            <Text
-              style={{ fontFamily: fontFamily.regular }}
-              className="
+          <Text
+            style={{ fontFamily: fontFamily.regular }}
+            className="
                 px-6
                 text-center
                 text-[16px]
@@ -74,22 +67,22 @@ export default function WelcomeScreen() {
                 md:text-[27px]
                 md:leading-[34px]
               "
-            >
-              Your campus. Your community. All in one place.
-            </Text>
-          </View>
+          >
+            Your campus. Your community. All in one place.
+          </Text>
+        </View>
 
-          {/* Buttons */}
-          <View
-            className="
+        {/* Buttons */}
+        <View
+          className="
                 w-full
                 gap-[15px]
               "
-          >
-            {/* GET STARTED */}
-            <Pressable
-              // onPress={() => router.push("/signup")}
-              className="
+        >
+          {/* GET STARTED */}
+          <Pressable
+            onPress={() => router.push("/loginOrSignup/createAccount")}
+            className="
                    w-full
     min-h-[49px]
     py-[17px]
@@ -108,24 +101,24 @@ export default function WelcomeScreen() {
     lg:min-h-[70px]
     lg:py-[22px]
                 "
-            >
-              <Text
-                style={{ fontFamily: fontFamily.regular }}
-                className="
+          >
+            <Text
+              style={{ fontFamily: fontFamily.regular }}
+              className="
                   text-[14px]
     font-medium
     md:text-[18px]
     lg:text-[20px]
                   "
-              >
-                Get Started
-              </Text>
-            </Pressable>
+            >
+              Get Started
+            </Text>
+          </Pressable>
 
-            {/* LOGIN */}
-            <Pressable
-              // onPress={() => router.push("/login")}
-              className=" w-full
+          {/* LOGIN */}
+          <Pressable
+            // onPress={() => router.push("/login")}
+            className=" w-full
                   min-h-[49px]
     py-[17px]
     items-center
@@ -143,25 +136,25 @@ export default function WelcomeScreen() {
     lg:min-h-[70px]
     lg:py-[22px]
                 "
-            >
-              <Text
-                style={{ fontFamily: fontFamily.regular }}
-                className="
+          >
+            <Text
+              style={{ fontFamily: fontFamily.regular }}
+              className="
                     text-[14px]
     font-medium
     md:text-[18px]
     lg:text-[20px]
                   "
-              >
-                Log In
-              </Text>
-            </Pressable>
-          </View>
+            >
+              Log In
+            </Text>
+          </Pressable>
+        </View>
 
-          {/* Terms & Privacy */}
-          <Text
-            style={{ fontFamily: fontFamily.regular }}
-            className="
+        {/* Terms & Privacy */}
+        <Text
+          style={{ fontFamily: fontFamily.regular }}
+          className="
               mt-12
               px-4
               text-center
@@ -173,11 +166,10 @@ export default function WelcomeScreen() {
     md:text-[16px]
     md:leading-[20.8px]
             "
-          >
-            By continuing you agree to our Terms & Privacy Policy
-          </Text>
-        </View>
+        >
+          By continuing you agree to our Terms & Privacy Policy
+        </Text>
       </View>
-    </View>
+    </LoginContainer>
   );
 }

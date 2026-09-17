@@ -4,6 +4,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useState } from "react";
 import SplashScreenAnimation from "../components/SplashScreenAnimation";
+import { StatusBar } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -29,6 +30,7 @@ export default function RootLayout() {
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
+      <StatusBar barStyle="dark-content" backgroundColor="#FFF9F5" />
       <Stack.Screen name="index.tsx" />
     </Stack>
   );

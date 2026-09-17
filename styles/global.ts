@@ -12,6 +12,11 @@ export const colors = {
 };
 
 export const globalStyles = StyleSheet.create({
+  screenContainer: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+
   container: {
     flex: 1,
     backgroundColor: colors.background,
