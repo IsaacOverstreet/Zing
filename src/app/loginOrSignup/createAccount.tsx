@@ -43,14 +43,23 @@ export default function CreateAccount() {
         {/* Form input*/}
         <View className="mt-[px] gap-[20px] border border-red-500">
           {/* Name */}
-          <Textinput placeholder="Full name" />
+          <Textinput
+            placeholder="Full name"
+            textClassName="text-[12px] md:text-[16px] lg:text-[18px]"
+          />
           {/* Email */}
-          <Textinput placeholder="Email address" />
+          <Textinput
+            placeholder="Email address"
+            textClassName="text-[12px] md:text-[16px] lg:text-[18px]"
+          />
 
           {/* Password */}
-          <Textinput placeholder="Email address" />
           <View className="gap-2">
-            <Textinput placeholder="Password" password />
+            <Textinput
+              placeholder="Password"
+              password
+              textClassName="text-[12px] md:text-[16px] lg:text-[18px]"
+            />
 
             {/* Password strength */}
             {/* <View className="gap-1">
@@ -68,13 +77,20 @@ export default function CreateAccount() {
           </View>
 
           {/* Confirm Password */}
-          <Textinput placeholder="Password" password />
+          <Textinput
+            placeholder="Password"
+            password
+            textClassName="text-[12px] md:text-[16px] lg:text-[18px]"
+          />
         </View>
 
         {/*Signup + Social Login */}
         <View className=" gap-[23px]">
           {/* Sign Up */}
-          <Button text="Sign Up" />
+          <Button
+            text="Sign Up"
+            textClassName="text-[16px] md:text-[18px] lg:text-[20px]"
+          />
 
           {/* Divider */}
           <View className="flex-row items-center gap-2">
@@ -89,20 +105,46 @@ export default function CreateAccount() {
 
           {/* Social buttons */}
           <View className="flex-row gap-3">
-            <Button text="Google" socialButton />
-            <Button text="Apple" socialButton isApple />
+            <Button
+              text="Google"
+              socialButton
+              textClassName="text-[12px] md:text-[16px] lg:text-[18px]"
+            />
+            <Button
+              text="Apple"
+              socialButton
+              isApple
+
+              textClassName="text-[12px] md:text-[16px] lg:text-[18px]"
+            />
           </View>
         </View>
 
         {/* Bottom Login */}
         <View className="mt-auto items-center pt-20">
           <View className="flex-row items-center gap-2">
-            <Text className="font-semibold text-[16px]">
+            <Text
+              style={{ fontFamily: fontFamily.semiBold }}
+              className="text-[16px]        
+    leading-[15.6px]
+    sm:text-[18px]
+    sm:leading-[18.2px]
+    md:text-[20px]
+    md:leading-[20.8px]"
+            >
               Already have an account?
             </Text>
 
             <Pressable onPress={() => router.push("/login")}>
-              <Text className="font-semibold text-[16px] text-[#75429B]">
+              <Text
+                style={{ fontFamily: fontFamily.semiBold }}
+                className="text-[16px]  text-[#765097]       
+    leading-[15.6px]
+    sm:text-[18px]
+    sm:leading-[18.2px]
+    md:text-[20px]
+    md:leading-[20.8px]"
+              >
                 Log In
               </Text>
             </Pressable>
