@@ -1,4 +1,3 @@
-import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
 import { StyleSheet } from "react-native";
 
 export const colors = {
@@ -20,9 +19,9 @@ export const globalStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    paddingTop: 70,
     paddingHorizontal: 20,
     color: colors.text,
+    alignItems: "center",
   },
 
   sectionTitle: {

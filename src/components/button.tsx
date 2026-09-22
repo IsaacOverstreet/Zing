@@ -8,6 +8,7 @@ type ButtonProps = {
   isApple?: boolean;
   className?: string;
   textClassName?: string;
+  onPress?: () => void;
 };
 
 export default function Button({
@@ -16,6 +17,7 @@ export default function Button({
   isApple = false,
   className = "",
   textClassName = "",
+  onPress,
 }: ButtonProps) {
   const { width } = useWindowDimensions();
   const iconSize =
@@ -26,14 +28,18 @@ export default function Button({
       {socialButton ? (
         <Pressable
           className={`h-[46px] flex-1 flex-row items-center justify-center gap-3 rounded-full border border-[#999999] bg-[#FFF9F6] shadow-black shadow-[0px_2px_0px] active:translate-y-1
-    active:shadow-[0px_2px_0px] ${className}`}
+        active:shadow-[0px_2px_0px]
+        sm:h-[52px]
+        md:h-[60px]
+        lg:h-[68px]
+        ${className}`}
         >
           {isApple ? (
             <Ionicons name="logo-apple" size={iconSize} color="#000" />
           ) : (
             <Text
               style={{ fontFamily: fontFamily.regular }}
-              className={`font-bold text-${iconSize} text-[#4285F4] `}
+              className="font-bold text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] text-[#4285F4]"
             >
               G
             </Text>
@@ -48,8 +54,12 @@ export default function Button({
         </Pressable>
       ) : (
         <Pressable
-          className=" h-[53px] items-center border border-[#999999] shadow-black shadow-[0px_3px_0px] justify-center rounded-full bg-[#E3E0DE] active:translate-y-1
-    active:shadow-[0px_2px_0px]"
+          onPress={onPress}
+          className={`h-[53px] items-center border border-[#999999] shadow-black shadow-[0px_3px_0px] justify-center rounded-full bg-[#E3E0DE] active:translate-y-1
+        active:shadow-[0px_2px_0px]
+        sm:h-[58px]
+        md:h-[64px]
+        lg:h-[70px] ${className}`}
         >
           <Text
             style={{ fontFamily: fontFamily.regular }}

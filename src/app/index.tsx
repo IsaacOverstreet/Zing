@@ -11,11 +11,12 @@ export default function WelcomeScreen() {
       {/* Main Card */}
       <View
         className="
+       
                 w-full
                 max-w-[820px]
                 bg-[#FFF9F6]
-                md:rounded-[48px] border border-blue-400
-                 gap-[38px] md:gap-[48px] lg:gap-[56px]
+                md:rounded-[48px]
+                 gap-[30px] md:gap-[40px] lg:gap-
               "
       >
         <Text
@@ -24,7 +25,7 @@ export default function WelcomeScreen() {
                 text-center
                 text-[24px]
                 tracking-[-3%]
-                sm:text-[28px]
+                sm:text-[26px]
                 md:text-[36px]
            
               "
@@ -43,10 +44,7 @@ export default function WelcomeScreen() {
           >
             <Image
               source={loginImage}
-              className="w-full rounded-b-[20px] h-[300px]
-    sm:h-[350px]
-    md:h-[450px]
-    lg:h-[550px]"
+              className="w-full rounded-b-[20px] h-[300px] sm:h-[350px] md:h-[700px] lg:h-[550px]"
               resizeMode="cover"
             />
           </View>

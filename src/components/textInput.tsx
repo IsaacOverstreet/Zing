@@ -15,7 +15,11 @@ export default function Textinput({
   return (
     <>
       {password ? (
-        <View className="h-[43px] flex-row items-center rounded-full border border-[#999999] bg-[#FFF9F6] shadow-black shadow-[0px_3px_0px] px-8 ">
+        <View
+          className="h-[43px] sm:h-[50px] md:h-[58px] lg:h-[66px]
+        flex-row items-center rounded-full border border-[#999999] bg-[#FFF9F6]
+        shadow-black shadow-[0px_3px_0px] px-8"
+        >
           <TextInput
             className={`flex-1 font-regular ${textClassName}`}
             placeholder={placeholder}
@@ -24,10 +28,14 @@ export default function Textinput({
             secureTextEntry
           />
 
-          <Ionicons name="eye-off-outline" size={24} color="#000" />
+          <Ionicons name="eye-off-outline" size={16} color="#000" />
         </View>
       ) : (
-        <View className="h-[43px] justify-center rounded-full px-8 border border-[#999999] bg-[#FFF9F6] shadow-black shadow-[0px_3px_0px]">
+        <View
+          className="h-[43px] sm:h-[50px] md:h-[58px] lg:h-[66px]
+        justify-center rounded-full px-8 border border-[#999999]
+        bg-[#FFF9F6] shadow-black shadow-[0px_3px_0px]"
+        >
           <TextInput
             className={`font-regular ${textClassName}`}
             placeholder={placeholder}

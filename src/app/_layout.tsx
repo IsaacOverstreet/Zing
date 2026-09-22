@@ -1,12 +1,12 @@
 import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
-import { useEffect, useState } from "react";
-import SplashScreenAnimation from "../components/SplashScreenAnimation";
+import { useState } from "react";
 import { StatusBar } from "react-native";
+import SplashScreenAnimation from "../components/SplashScreenAnimation";
 
-SplashScreen.preventAutoHideAsync();
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function RootLayout() {
   const [isReady, setIsReady] = useState(false);
@@ -18,20 +18,28 @@ export default function RootLayout() {
     [fontFamily.bold]: require("../../assets/fonts/Lufga-Bold.otf"),
   });
 
-  useEffect(() => {
-    if (fontsLoaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
+  // useEffect(() => {
+  //   if (fontsLoaded) {
+  //     SplashScreen.hideAsync();
+  //   }
+  // }, [fontsLoaded]);
 
-  if (!fontsLoaded || !isReady) {
+  // if (!fontsLoaded || !isReady) {
+  //   return <SplashScreenAnimation onFinish={() => setIsReady(true)} />;
+  // }
+
+  if (!fontsLoaded) {
     return <SplashScreenAnimation onFinish={() => setIsReady(true)} />;
   }
 
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <StatusBar barStyle="dark-content" backgroundColor="#FFF9F5" />
-      <Stack.Screen name="index.tsx" />
-    </Stack>
+    <SafeAreaProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <Stack screenOptions={{ headerShown: false }}>
+          <StatusBar barStyle="dark-content" backgroundColor="#FFF9F5" />
+          <Stack.Screen name="index.tsx" />
+        </Stack>
+      </GestureHandlerRootView>
+    </SafeAreaProvider>
   );
 }
