@@ -7,12 +7,13 @@ import BottomSheet, {
 import { useEffect, useRef } from "react";
 import { Image, Text, useColorScheme, View } from "react-native";
 import emailIcon from "../../../assets/images/emailIcon.png";
+import { useResponsive } from "@/src/utils/responsive";
 
 interface props {
   isVisible: boolean;
 }
 export default function BottomSheetExample({ isVisible }: props) {
-  const colorScheme = useColorScheme();
+  const { content, controlHeight, textSize } = useResponsive();
 
   const sheetRef = useRef<BottomSheet>(null);
 
@@ -55,21 +56,27 @@ export default function BottomSheetExample({ isVisible }: props) {
       }}
     >
       <BottomSheetView style={{ flex: 1, padding: 20, alignItems: "center" }}>
-        <View className="flex justify-center items-center gap-[24px] w-full ">
+        <View
+          style={{ gap: content(24) }}
+          className="flex justify-center items-center w-full "
+        >
           <Image
             source={emailIcon}
-            style={{ width: 65, height: 62 }}
+            style={{ width: controlHeight(65), height: controlHeight(62) }}
             resizeMode="contain"
+            className="w-"
           />
           <Text
-            style={{ fontFamily: fontFamily.semiBold }}
-            className=" text-[20px]"
+            style={{ fontFamily: fontFamily.semiBold, fontSize: textSize(20) }}
           >
             Verify Your Email
           </Text>
           <Text
-            style={{ fontFamily: fontFamily.regular }}
-            className=" text-[12px] text-center"
+            style={{
+              fontFamily: fontFamily.regular,
+              fontSize: textSize(12),
+              textAlign: "center",
+            }}
           >
             We've sent a verification link to your email address. Click the link
             to confirm your account and get started.
@@ -77,8 +84,10 @@ export default function BottomSheetExample({ isVisible }: props) {
 
           <Button
             text="Done"
-            textClassName="text-[#ffff]"
+            fontSize={15}
+            buttonHeight={53}
             className="w-full bg-[#765097]"
+            textClassName="text-[#FFF9F6]"
             onPress={() => sheetRef.current?.close()}
           />
         </View>

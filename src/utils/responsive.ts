@@ -3,16 +3,37 @@ import { useWindowDimensions } from "react-native";
 export function useResponsive() {
   const { width, height } = useWindowDimensions();
 
+  const isPhone = width >= 375 && width < 768;
+  const isTablet = width >= 768 && width < 1024;
+  const isLargeTablet = width >= 1024;
+
+  const textSize = (base: number) => {
+    if (isLargeTablet) return base + 12;
+    if (isTablet) return base + 8;
+    if (isPhone) return base;
+
+    return base;
+  };
+
+  const content = (base: number) => {
+    if (isLargeTablet) return base + 20;
+    if (isTablet) return base + 10;
+
+    return base;
+  };
+
+  const controlHeight = (base: number) => {
+    if (isLargeTablet) return base + 30;
+    if (isTablet) return base + 20;
+
+    return base;
+  };
+
   return {
     width,
     height,
-    isPhone: width < 768,
-    isTablet: width >= 768 && width < 1024,
-    isLargeTablet: width >= 1024, // iPad Pro, large tablets
-    isLandscape: width > height,
-
-    // scale any value relative to screen
-    wp: (percent: number) => (width * percent) / 100, // width percent
-    hp: (percent: number) => (height * percent) / 100, // height percent
+    content,
+    textSize,
+    controlHeight,
   };
 }
