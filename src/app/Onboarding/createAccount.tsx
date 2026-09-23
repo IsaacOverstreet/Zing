@@ -21,8 +21,11 @@ export default function CreateAccount() {
       <LoginContainer>
         {/* Main Card */}
         <View style={{ gap: content(30) }}>
-          <View className="flex-row items-center gap-7">
-            <Pressable onPress={() => router.back()}>
+          <View className="relative w-full  flex-row items-center gap-7 justify-center">
+            <Pressable
+              className="absolute left-0"
+              onPress={() => router.back()}
+            >
               <Back
                 style={{ width: controlHeight(11), height: controlHeight(23) }}
               />
@@ -57,7 +60,7 @@ export default function CreateAccount() {
             {/* Password */}
             <View className="gap-2">
               <Textinput
-                placeholder="Password"
+                placeholder="Create Password"
                 password
                 fontSize={12}
                 inputAreaHeight={43}
@@ -81,7 +84,7 @@ export default function CreateAccount() {
             {/* Confirm Password */}
 
             <Textinput
-              placeholder="Password"
+              placeholder="Confirm Password"
               password
               fontSize={12}
               inputAreaHeight={43}
