@@ -29,11 +29,19 @@ export function useResponsive() {
     return base;
   };
 
+  const imageHeight = (base: number) => {
+    if (isLargeTablet) return base + 200;
+    if (isTablet) return base + 100;
+
+    return base;
+  };
+
   return {
     width,
     height,
     content,
     textSize,
     controlHeight,
+    imageHeight,
   };
 }

@@ -1,18 +1,26 @@
 import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
+import emailIcon from "@/assets/images/emailIcon.png";
 import Button from "@/src/components/button";
+import { useResponsive } from "@/src/utils/responsive";
 import BottomSheet, {
   BottomSheetBackdrop,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
 import { useEffect, useRef } from "react";
-import { Image, Text, useColorScheme, View } from "react-native";
-import emailIcon from "../../../assets/images/emailIcon.png";
-import { useResponsive } from "@/src/utils/responsive";
+import { Image, Text, View } from "react-native";
 
 interface props {
   isVisible: boolean;
+  title: string;
+  description: string;
+  onPress?: () => void;
 }
-export default function BottomSheetExample({ isVisible }: props) {
+export default function BottomModal({
+  isVisible,
+  title,
+  description,
+  onPress,
+}: props) {
   const { content, controlHeight, textSize } = useResponsive();
 
   const sheetRef = useRef<BottomSheet>(null);
@@ -69,7 +77,7 @@ export default function BottomSheetExample({ isVisible }: props) {
           <Text
             style={{ fontFamily: fontFamily.semiBold, fontSize: textSize(20) }}
           >
-            Verify Your Email
+            {title}
           </Text>
           <Text
             style={{
@@ -78,8 +86,7 @@ export default function BottomSheetExample({ isVisible }: props) {
               textAlign: "center",
             }}
           >
-            We've sent a verification link to your email address. Click the link
-            to confirm your account and get started.
+            {description}
           </Text>
 
           <Button
@@ -88,7 +95,10 @@ export default function BottomSheetExample({ isVisible }: props) {
             buttonHeight={53}
             className="w-full bg-[#765097]"
             textClassName="text-[#FFF9F6]"
-            onPress={() => sheetRef.current?.close()}
+            onPress={() => {
+              sheetRef.current?.close();
+              onPress;
+            }}
           />
         </View>
       </BottomSheetView>

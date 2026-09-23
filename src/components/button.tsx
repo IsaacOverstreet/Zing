@@ -1,4 +1,5 @@
 import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
+import GoogleIcon from "@/assets/images/googleIcon.svg";
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable, Text, useWindowDimensions } from "react-native";
 import { useResponsive } from "../utils/responsive";
@@ -41,15 +42,7 @@ export default function Button({
           {isApple ? (
             <Ionicons name="logo-apple" size={iconSize} color="#000" />
           ) : (
-            <Text
-              style={{
-                fontFamily: fontFamily.bold,
-                fontSize: textSize(fontSize),
-              }}
-              className=" text-[#4285F4]"
-            >
-              G
-            </Text>
+            <GoogleIcon width={iconSize} height={iconSize} />
           )}
 
           <Text

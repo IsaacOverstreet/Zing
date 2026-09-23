@@ -1,6 +1,6 @@
 import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
 import { Ionicons } from "@expo/vector-icons";
-import { TextInput, View } from "react-native";
+import { TextInput, useWindowDimensions, View } from "react-native";
 import { useResponsive } from "../utils/responsive";
 type TextinputProps = {
   placeholder: string;
@@ -16,6 +16,10 @@ export default function Textinput({
   inputAreaHeight = 43,
 }: TextinputProps) {
   const { textSize, content, controlHeight } = useResponsive();
+  const { width } = useWindowDimensions();
+
+  const iconSize =
+    width >= 1024 ? 22 : width >= 768 ? 20 : width >= 640 ? 18 : 16;
 
   return (
     <>
@@ -37,7 +41,7 @@ export default function Textinput({
             secureTextEntry
           />
 
-          <Ionicons name="eye-off-outline" size={16} color="#000" />
+          <Ionicons name="eye-off-outline" size={iconSize} color="#000" />
         </View>
       ) : (
         <View

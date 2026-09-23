@@ -15,18 +15,28 @@ export default function LoginContainer({
 }: LoginContainerProps) {
   const { width } = useWindowDimensions();
   const { content } = useResponsive();
-  const isTablet = width >= 768 && width < 1024;
+
+  const isSmallPhone = width < 375;
+  const isPhone = width >= 375 && width < 744;
+
+  const isTablet = width >= 744 && width < 1024;
   const isLargeTablet = width >= 1024;
-  const paddingVertical = isLargeTablet ? 150 : isTablet ? 60 : 60;
+
+  // padding
+  const paddingTop = isPhone ? 60 : isLargeTablet ? 150 : 150;
+  const paddingBottom = isPhone ? 20 : isLargeTablet ? 150 : 150;
+  const paddingHorizontal = isLargeTablet ? 100 : isTablet ? 80 : 20;
   return (
     <SafeAreaView style={globalStyles.screenContainer}>
-      <View style={[globalStyles.container, { paddingVertical }]}>
-        <View
-          style={{ gap: content(30) }}
-          className="w-full
-                max-w-[820px]
-                bg-[#FFF9F6]"
-        >
+      <View
+        style={[
+          globalStyles.container,
+          { paddingTop, paddingBottom },
+          { paddingHorizontal },
+        ]}
+        className=" flex-1"
+      >
+        <View className="flex-1 w-full justify-between max-w-[820px] bg-[#FFF9F6]">
           {children}
         </View>
       </View>

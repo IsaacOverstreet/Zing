@@ -7,7 +7,7 @@ import LoginContainer from "../components/loginContainer";
 import { useResponsive } from "../utils/responsive";
 
 export default function WelcomeScreen() {
-  const { textSize, content, controlHeight } = useResponsive();
+  const { textSize, imageHeight, controlHeight } = useResponsive();
 
   return (
     <LoginContainer>
@@ -32,7 +32,8 @@ export default function WelcomeScreen() {
         >
           <Image
             source={loginImage}
-            className="w-full rounded-b-[20px] h-[300px] sm:h-[350px] md:h-[700px] lg:h-[550px]"
+            style={{ height: imageHeight(300) }}
+            className="w-full rounded-b-[20px] "
             resizeMode="cover"
           />
         </View>
@@ -57,7 +58,7 @@ export default function WelcomeScreen() {
       >
         {/* GET STARTED */}
         <Pressable
-          onPress={() => router.push("/loginOrSignup/createAccount")}
+          onPress={() => router.push("/Onboarding/createAccount")}
           style={{ minHeight: controlHeight(52) }}
           className="
                    w-full
@@ -81,7 +82,7 @@ export default function WelcomeScreen() {
 
         {/* LOGIN */}
         <Pressable
-          // onPress={() => router.push("/login")}
+          onPress={() => router.push("/Onboarding/login")}
           style={{ minHeight: controlHeight(52) }}
           className=" w-full
     items-center
