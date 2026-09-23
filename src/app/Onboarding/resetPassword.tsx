@@ -15,8 +15,11 @@ export default function ResetPassword() {
       <LoginContainer>
         {/* Main Card */}
         <View style={{ gap: content(30) }}>
-          <View className="flex-row items-center gap-7">
-            <Pressable onPress={() => router.back()}>
+          <View className="relative w-full  flex-row items-center gap-7 justify-center">
+            <Pressable
+              className="absolute left-0"
+              onPress={() => router.back()}
+            >
               <Back
                 style={{ width: controlHeight(11), height: controlHeight(23) }}
               />
@@ -35,22 +38,21 @@ export default function ResetPassword() {
 
           {/* Form input*/}
           <View style={{ gap: content(20) }}>
-            {/* Email */}
+            {/* Password */}
             <Textinput
-              placeholder="Email address"
+              placeholder="Enter your new password"
+              password
               fontSize={12}
               inputAreaHeight={43}
             />
 
-            {/* Password */}
-            <View className="gap-2">
-              <Textinput
-                placeholder="Password"
-                password
-                fontSize={12}
-                inputAreaHeight={43}
-              />
-            </View>
+            {/* Confirm Password */}
+            <Textinput
+              placeholder="Confirm Password"
+              password
+              fontSize={12}
+              inputAreaHeight={43}
+            />
           </View>
 
           {/*Reset Password */}
@@ -60,7 +62,7 @@ export default function ResetPassword() {
               text="Reset Password"
               fontSize={16}
               buttonHeight={53}
-              className=" bg-[#E3E0DE] "
+              className=" bg-[#E3E0DE]"
             />
           </View>
         </View>

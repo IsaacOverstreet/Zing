@@ -97,7 +97,7 @@ export default function BottomModal({
             textClassName="text-[#FFF9F6]"
             onPress={() => {
               sheetRef.current?.close();
-              onPress;
+              onPress?.();
             }}
           />
         </View>
