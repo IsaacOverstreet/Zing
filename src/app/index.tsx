@@ -3,7 +3,7 @@ import { Image, Pressable, Text, View } from "react-native";
 import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
 import loginImage from "@/assets/images/loginImage.png";
 import { router } from "expo-router";
-import LoginContainer from "../components/loginContainer";
+import LoginContainer from "../components/LoginContainer";
 import { useResponsive } from "../utils/responsive";
 
 export default function WelcomeScreen() {
@@ -12,6 +12,7 @@ export default function WelcomeScreen() {
   return (
     <LoginContainer>
       {/* Main Card */}
+
       <Text
         style={{
           fontFamily: fontFamily.semiBold,
@@ -23,7 +24,7 @@ export default function WelcomeScreen() {
       </Text>
 
       {/* Illustration + Description */}
-      <View className="gap-[24px] mt-[20px]">
+      <View className="gap-[24px] mt-[20px] w-full">
         <View
           className=" 
                 w-full
@@ -32,7 +33,7 @@ export default function WelcomeScreen() {
         >
           <Image
             source={loginImage}
-            style={{ height: imageHeight(300) }}
+            style={{ width: "100%", height: imageHeight(300) }}
             className="w-full rounded-b-[20px] "
             resizeMode="cover"
           />
@@ -58,7 +59,7 @@ export default function WelcomeScreen() {
       >
         {/* GET STARTED */}
         <Pressable
-          onPress={() => router.push("/Onboarding/createAccount")}
+          onPress={() => router.push("/LoginOrSignup/createAccount")}
           style={{ minHeight: controlHeight(52) }}
           className="
                    w-full
@@ -82,7 +83,7 @@ export default function WelcomeScreen() {
 
         {/* LOGIN */}
         <Pressable
-          onPress={() => router.push("/Onboarding/login")}
+          onPress={() => router.push("/LoginOrSignup/login")}
           style={{ minHeight: controlHeight(52) }}
           className=" w-full
     items-center

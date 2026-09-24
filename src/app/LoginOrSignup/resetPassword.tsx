@@ -1,11 +1,13 @@
 import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
-import Back from "@/assets/images/backButton.svg";
-import Button from "@/src/components/button";
-import LoginContainer from "@/src/components/loginContainer";
-import Textinput from "@/src/components/textInput";
+
+import BackRoute from "@/src/components/BackRoute";
+import Button from "@/src/components/Button";
+import LoginContainer from "@/src/components/LoginContainer";
+import Textinput from "@/src/components/TextInput";
 import { useResponsive } from "@/src/utils/responsive";
 import { router } from "expo-router";
-import { Pressable, Text, View } from "react-native";
+
+import { Text, View } from "react-native";
 
 export default function ResetPassword() {
   const { textSize, content, controlHeight } = useResponsive();
@@ -16,14 +18,7 @@ export default function ResetPassword() {
         {/* Main Card */}
         <View style={{ gap: content(30) }}>
           <View className="relative w-full  flex-row items-center gap-7 justify-center">
-            <Pressable
-              className="absolute left-0"
-              onPress={() => router.back()}
-            >
-              <Back
-                style={{ width: controlHeight(11), height: controlHeight(23) }}
-              />
-            </Pressable>
+            <BackRoute />
 
             <Text
               style={{
@@ -63,6 +58,7 @@ export default function ResetPassword() {
               fontSize={16}
               buttonHeight={53}
               className=" bg-[#E3E0DE]"
+              onPress={() => router.push("/OnboardingUsers/roleSelection")}
             />
           </View>
         </View>

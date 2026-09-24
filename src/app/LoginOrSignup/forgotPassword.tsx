@@ -1,16 +1,17 @@
 import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
-import Back from "@/assets/images/backButton.svg";
-import BottomModal from "@/src/components/bottomModal";
-import Button from "@/src/components/button";
-import LoginContainer from "@/src/components/loginContainer";
-import Textinput from "@/src/components/textInput";
+
+import BackRoute from "@/src/components/BackRoute";
+import BottomModal from "@/src/components/BottomModal";
+import Button from "@/src/components/Button";
+import LoginContainer from "@/src/components/LoginContainer";
+import Textinput from "@/src/components/TextInput";
 import { useResponsive } from "@/src/utils/responsive";
 import { router } from "expo-router";
 import { useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 export default function ForgotPassword() {
-  const { textSize, imageHeight, content, controlHeight } = useResponsive();
+  const { textSize, content } = useResponsive();
   const [showDrawer, setShowDrawer] = useState(false);
   const handleSendResetLink = async () => {
     setShowDrawer(true);
@@ -21,19 +22,9 @@ export default function ForgotPassword() {
       <LoginContainer>
         {/* Main Card */}
         <View style={{ gap: content(30) }}>
-          <View className="items-center gap-7">
+          <View style={{ gap: content(20) }} className="items-center">
             <View className="relative w-full flex-row items-center justify-center">
-              <Pressable
-                onPress={() => router.back()}
-                className="absolute left-0"
-              >
-                <Back
-                  style={{
-                    width: controlHeight(11),
-                    height: controlHeight(23),
-                  }}
-                />
-              </Pressable>
+              <BackRoute />
 
               <Text
                 style={{
@@ -84,7 +75,7 @@ export default function ForgotPassword() {
         isVisible={showDrawer}
         title="Check Your Email"
         description="Check your email for a password reset link. If you don’t see it, click “Reset Password” to resend."
-        onPress={() => router.push("/Onboarding/resetPassword")}
+        onPress={() => router.push("/LoginOrSignup/resetPassword")}
       />
     </>
   );

@@ -1,60 +1,47 @@
 import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
-import Button from "@/src/components/button";
-import LoginContainer from "@/src/components/loginContainer";
-import Textinput from "@/src/components/textInput";
+import BackRoute from "@/src/components/BackRoute";
+import Button from "@/src/components/Button";
+import LoginContainer from "@/src/components/LoginContainer";
+import Textinput from "@/src/components/TextInput";
 import { useResponsive } from "@/src/utils/responsive";
-import { router } from "expo-router";
+import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
-import Back from "@/assets/images/backButton.svg";
+import BottomModal from "../../components/BottomModal";
 
-export default function Login() {
+export default function CreateAccount() {
+  const [showDrawer, setShowDrawer] = useState(false);
   const { textSize, content, controlHeight } = useResponsive();
 
+  const handleVerifyAcc = async () => {
+    setShowDrawer(true);
+  };
   return (
     <>
       <LoginContainer>
         {/* Main Card */}
         <View style={{ gap: content(30) }}>
-          <View className="items-center gap-7">
-            <View className="relative w-full flex-row items-center justify-center">
-              <Pressable
-                onPress={() => router.back()}
-                className="absolute left-0"
-              >
-                <Back
-                  style={{
-                    width: controlHeight(11),
-                    height: controlHeight(23),
-                  }}
-                />
-              </Pressable>
-
-              <Text
-                style={{
-                  fontFamily: fontFamily.semiBold,
-                  fontSize: textSize(24),
-                  textAlign: "center",
-                }}
-              >
-                Welcome Back
-              </Text>
-            </View>
+          <View className="relative w-full  flex-row items-center gap-7 justify-center">
+            <BackRoute />
 
             <Text
               style={{
-                fontFamily: fontFamily.regular,
-                fontSize: textSize(12),
+                fontFamily: fontFamily.semiBold,
+                fontSize: textSize(24),
                 textAlign: "center",
               }}
-              className="px-[10px]"
             >
-              Log into your existing account to continue your matchmaking
-              journey.
+              Create Your Account
             </Text>
           </View>
 
           {/* Form input*/}
           <View style={{ gap: content(20) }}>
+            {/* Name */}
+            <Textinput
+              placeholder="Full name"
+              fontSize={12}
+              inputAreaHeight={43}
+            />
             {/* Email */}
             <Textinput
               placeholder="Email address"
@@ -65,59 +52,46 @@ export default function Login() {
             {/* Password */}
             <View className="gap-2">
               <Textinput
-                placeholder="Password"
+                placeholder="Create Password"
                 password
                 fontSize={12}
                 inputAreaHeight={43}
               />
+
+              {/* Password strength */}
+              {/* <View className="gap-1">
+              <View className="flex-row gap-2">
+                <View className="h-[6px] flex-1 rounded-full bg-[#F9B900]" />
+                <View className="h-[6px] flex-1 rounded-full bg-[#F9B900]" />
+                <View className="h-[6px] flex-1 rounded-full bg-[#C7C7C7]" />
+                <View className="h-[6px] flex-1 rounded-full bg-[#C7C7C7]" />
+              </View>
+
+              <Text className="self-end font-regular text-[12px] text-[#777]">
+                Weak
+              </Text>
+            </View> */}
             </View>
 
-            {/* Remember me section */}
-            <View className="w-full flex-row items-center justify-between">
-              <Pressable className="flex-row items-center gap-[10px]">
-                <View
-                  style={{
-                    height: controlHeight(16),
-                    width: controlHeight(16),
-                  }}
-                  className=" border rounded-full border-[#999999] p-1"
-                />
+            {/* Confirm Password */}
 
-                <Text
-                  style={{
-                    fontFamily: fontFamily.regular,
-                    fontSize: textSize(12),
-                  }}
-                >
-                  Remember me
-                </Text>
-              </Pressable>
-
-              {/* forgot password */}
-              <Pressable
-                onPress={() => router.push("/Onboarding/forgotPassword")}
-              >
-                <Text
-                  style={{
-                    fontFamily: fontFamily.semiBold,
-                    fontSize: textSize(12),
-                    color: "#E590B4",
-                  }}
-                >
-                  Forgot Password?
-                </Text>
-              </Pressable>
-            </View>
+            <Textinput
+              placeholder="Confirm Password"
+              password
+              fontSize={12}
+              inputAreaHeight={43}
+            />
           </View>
 
           {/*Signup + Social Login */}
           <View style={{ gap: content(23) }}>
             {/* Sign Up */}
             <Button
-              text="Log In"
+              text="Sign Up"
               fontSize={16}
               buttonHeight={53}
               className=" bg-[#E3E0DE] "
+              onPress={handleVerifyAcc}
             />
 
             {/* Divider */}
@@ -157,7 +131,7 @@ export default function Login() {
         </View>
 
         {/* Bottom Login */}
-        <View className="items-center">
+        <View className=" mt-[100px]  items-center ">
           <View className="flex-row items-center gap-2">
             <Text
               style={{
@@ -165,7 +139,7 @@ export default function Login() {
                 fontSize: textSize(16),
               }}
             >
-              Don’t have an account?
+              Already have an account?
             </Text>
 
             <Pressable>
@@ -176,12 +150,17 @@ export default function Login() {
                 }}
                 className="text-[#765097]"
               >
-                Sign Up
+                Log In
               </Text>
             </Pressable>
           </View>
         </View>
       </LoginContainer>
+      <BottomModal
+        isVisible={showDrawer}
+        title="Verify Your Email"
+        description="We've sent a verification link to your email address. Click the link to confirm your account and get started."
+      />
     </>
   );
 }

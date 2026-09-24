@@ -1,6 +1,6 @@
 import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
 import emailIcon from "@/assets/images/emailIcon.png";
-import Button from "@/src/components/button";
+import Button from "@/src/components/Button";
 import { useResponsive } from "@/src/utils/responsive";
 import BottomSheet, {
   BottomSheetBackdrop,
@@ -63,7 +63,10 @@ export default function BottomModal({
         width: 0,
       }}
     >
-      <BottomSheetView style={{ flex: 1, padding: 20, alignItems: "center" }}>
+      <BottomSheetView
+        style={{ flex: 1, padding: 20, alignItems: "center" }}
+        className=""
+      >
         <View
           style={{ gap: content(24) }}
           className="flex justify-center items-center w-full "

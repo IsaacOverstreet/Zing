@@ -1,15 +1,14 @@
 import { globalStyles } from "@/styles/global";
 import { ReactNode } from "react";
-import { Platform, useWindowDimensions, View } from "react-native";
+import { useWindowDimensions, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import ErrorMessage from "./ErrorMessage";
 
 type LoginContainerProps = {
   children: ReactNode;
   centered?: boolean;
 };
 
-export default function LoginContainer({
+export default function AppContainer({
   children,
   centered = false,
 }: LoginContainerProps) {
@@ -22,11 +21,11 @@ export default function LoginContainer({
   const isLargeTablet = width >= 1024;
 
   // padding
-  const paddingTop = isPhone ? 70 : isLargeTablet ? 150 : 150;
+  const paddingTop = isPhone ? 20 : isLargeTablet ? 150 : 150;
   const paddingBottom = isPhone ? 10 : isLargeTablet ? 150 : 150;
   const paddingHorizontal = isLargeTablet ? 100 : isTablet ? 80 : 20;
   return (
-    <SafeAreaView style={globalStyles.screenContainer}>
+    <SafeAreaView className="" style={globalStyles.screenContainer}>
       <View
         style={[
           globalStyles.container,
@@ -35,11 +34,8 @@ export default function LoginContainer({
         ]}
         className="relative flex-1 "
       >
-        {(Platform.OS === "ios" || Platform.OS === "android") && (
-          <ErrorMessage />
-        )}
         {/* content wrapper */}
-        <View className="relative flex-1 w-full justify-between max-w-[820px] bg-[#FFF9F6]">
+        <View className="flex-1 w-full  max-w-[820px] bg-[#FFF9F6] ">
           {children}
         </View>
       </View>
