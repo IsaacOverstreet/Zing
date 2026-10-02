@@ -59,7 +59,7 @@ export default function RoleSelection() {
           {/* Attendee */}
           <Button
             onPress={() => {
-              router.push("/OnboardingUsers/searchSchool");
+              router.push("/OnboardingUsers/nearbySchools");
             }}
             className=" bg-[#FFF9F5] "
             text="Attendee"
