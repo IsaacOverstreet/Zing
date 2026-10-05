@@ -13,7 +13,7 @@ export default function BackRoute({
   const { controlHeight } = useResponsive();
 
   return (
-    <Pressable onPress={onPress} className="absolute left-0">
+    <Pressable onPress={onPress} className=" absolute left-0">
       <Back width={controlHeight(11)} height={controlHeight(23)} />
     </Pressable>
   );

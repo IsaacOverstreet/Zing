@@ -1,5 +1,5 @@
 import BackRoute from "@/src/components/BackRoute";
-import SearchBar from "@/src/components/searchBar";
+import SearchBar from "@/src/components/SearchBar";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
@@ -24,12 +24,13 @@ export default function SearchSchool({ setIsSearching }: SearchSchoolProps) {
   );
 
   return (
+    // This was used for the ternary conditional statement in the NearBySchools screen.
     <View>
       {/* Search bar */}
-      <View className="relative w-full flex-row items-center justify-end gap-7">
+      <View className="relative w-full flex-row items-center justify-end ">
         <BackRoute onPress={() => setIsSearching(false)} />
 
-        <SearchBar setSearch={setSearch} className="w-[93%]" />
+        <SearchBar setSearch={setSearch} className="w-[94%]" />
       </View>
 
       {/* Search results */}

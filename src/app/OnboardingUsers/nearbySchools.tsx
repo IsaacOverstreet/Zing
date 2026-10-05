@@ -1,6 +1,6 @@
 import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
 import AppContainer from "@/src/components/AppContainer";
-import SearchBar from "@/src/components/searchBar";
+import SearchBar from "@/src/components/SearchBar";
 import { useResponsive } from "@/src/utils/responsive";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";

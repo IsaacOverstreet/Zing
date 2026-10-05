@@ -18,7 +18,7 @@ export default function SearchBar({
 }: searchBarProps) {
   const { textSize, imageHeight, controlHeight, content } = useResponsive();
   return (
-    <View className={`w-full ${className}`}>
+    <View className={`w-full ${className} `}>
       <View
         style={{
           height: controlHeight(43),
