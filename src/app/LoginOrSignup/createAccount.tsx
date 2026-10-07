@@ -131,7 +131,7 @@ export default function CreateAccount() {
         </View>
 
         {/* Bottom Login */}
-        <View className=" mt-[100px]  items-center ">
+        <View className=" mt-[170px]  items-center ">
           <View className="flex-row items-center gap-2">
             <Text
               style={{

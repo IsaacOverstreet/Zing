@@ -37,7 +37,7 @@ export default function RootLayout() {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <StatusBar barStyle="dark-content" backgroundColor="#FFF9F5" />
         <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="index" />
+          <Stack.Screen name="(tabs)" />
         </Stack>
       </GestureHandlerRootView>
     </SafeAreaProvider>

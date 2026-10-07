@@ -27,10 +27,14 @@ export default function SearchSchool({ setIsSearching }: SearchSchoolProps) {
     // This was used for the ternary conditional statement in the NearBySchools screen.
     <View>
       {/* Search bar */}
-      <View className="relative w-full flex-row items-center justify-end ">
+      <View className="relative w-full  flex-row items-center justify-end ">
         <BackRoute onPress={() => setIsSearching(false)} />
 
-        <SearchBar setSearch={setSearch} className="w-[94%]" />
+        <SearchBar
+          placeholder="search for school"
+          setSearch={setSearch}
+          className="w-[97%]"
+        />
       </View>
 
       {/* Search results */}

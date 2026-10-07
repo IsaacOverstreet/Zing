@@ -1,18 +1,15 @@
 import { globalStyles } from "@/styles/global";
 import { ReactNode } from "react";
-import { Platform, ScrollView, useWindowDimensions, View } from "react-native";
+import { useWindowDimensions, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import ErrorMessage from "./ErrorMessage";
 
-type LoginContainerProps = {
+type HomePageContainerProps = {
   children: ReactNode;
-  centered?: boolean;
 };
 
-export default function LoginContainer({
+export default function HomePageContainer({
   children,
-  centered = false,
-}: LoginContainerProps) {
+}: HomePageContainerProps) {
   const { width } = useWindowDimensions();
 
   const isSmallPhone = width < 375;
@@ -22,11 +19,15 @@ export default function LoginContainer({
   const isLargeTablet = width >= 1024;
 
   // padding
-  const paddingTop = isPhone ? 70 : isLargeTablet ? 70 : 70;
-  const paddingBottom = isPhone ? 10 : isLargeTablet ? 10 : 10;
+  const paddingTop = isPhone ? 20 : isLargeTablet ? 70 : 70;
+  const paddingBottom = isPhone ? 0 : isLargeTablet ? 0 : 0;
   const paddingHorizontal = isLargeTablet ? 100 : isTablet ? 80 : 20;
   return (
-    <SafeAreaView style={globalStyles.screenContainer}>
+    <SafeAreaView
+      edges={["top"]}
+
+      style={globalStyles.screenContainer}
+    >
       <View
         style={[
           globalStyles.container,
@@ -35,16 +36,10 @@ export default function LoginContainer({
         ]}
         className="relative flex-1 "
       >
-        {(Platform.OS === "ios" || Platform.OS === "android") && (
-          <ErrorMessage />
-        )}
         {/* content wrapper */}
-        <ScrollView
-          contentContainerStyle={{ justifyContent: "space-between" }}
-          className="relative flex-1 w-full max-w-[820px] bg-[#FFF9F6]"
-        >
+        <View className="relative flex-1 w-full max-w-[820px] justify-between bg-[#FFF9F6]">
           {children}
-        </ScrollView>
+        </View>
       </View>
     </SafeAreaView>
   );

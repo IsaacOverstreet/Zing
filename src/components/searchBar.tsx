@@ -8,6 +8,7 @@ type searchBarProps = {
   onSearch?: string;
   setIsSearching?: (value: boolean) => void;
   className?: string;
+  placeholder: string;
 };
 
 export default function SearchBar({
@@ -15,10 +16,11 @@ export default function SearchBar({
   onSearch = "",
   setIsSearching = () => {},
   className,
+  placeholder,
 }: searchBarProps) {
   const { textSize, imageHeight, controlHeight, content } = useResponsive();
   return (
-    <View className={`w-full ${className} `}>
+    <View className={` ${className} `}>
       <View
         style={{
           height: controlHeight(43),
@@ -32,7 +34,7 @@ export default function SearchBar({
           value={onSearch}
           onFocus={() => setIsSearching(true)}
           onChangeText={setSearch}
-          placeholder="Search for your school"
+          placeholder={placeholder}
           placeholderTextColor="#B5B0AD"
           className="ml-2 flex-1"
           style={{

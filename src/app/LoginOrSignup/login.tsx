@@ -147,7 +147,7 @@ export default function Login() {
         </View>
 
         {/* Bottom Login */}
-        <View className="items-center">
+        <View className=" mt-[200px]  items-center ">
           <View className="flex-row items-center gap-2">
             <Text
               style={{

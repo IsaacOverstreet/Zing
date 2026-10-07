@@ -8,7 +8,7 @@ export function useResponsive() {
   const isLargeTablet = width >= 1024;
 
   const textSize = (base: number) => {
-    if (isLargeTablet) return base + 12;
+    // if (isLargeTablet) return base + 12;
     if (isTablet) return base + 8;
     if (isPhone) return base;
 
@@ -23,14 +23,14 @@ export function useResponsive() {
   };
 
   const controlHeight = (base: number) => {
-    if (isLargeTablet) return base + 30;
+    // if (isLargeTablet) return base + 30;
     if (isTablet) return base + 20;
 
     return base;
   };
 
   const imageHeight = (base: number) => {
-    if (isLargeTablet) return base + 200;
+    if (isLargeTablet) return base + 150;
     if (isTablet) return base + 100;
 
     return base;

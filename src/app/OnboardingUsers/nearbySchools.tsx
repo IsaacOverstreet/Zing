@@ -72,7 +72,10 @@ export default function NearBySchools() {
             </View>
 
             {/* Search */}
-            <SearchBar setIsSearching={setIsSearching} />
+            <SearchBar
+              placeholder="search for school"
+              setIsSearching={setIsSearching}
+            />
 
             {/* Nearby schools */}
             <View style={{ gap: content(20) }}>
