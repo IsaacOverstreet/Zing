@@ -1,3 +1,5 @@
+import HomeIcon from "@/assets/images/home.svg";
+import TicketIcon from "@/assets/images/hugeicons_ticket-01.svg";
 import "@/global.css";
 import { colors } from "@/styles/global";
 import { Ionicons } from "@expo/vector-icons";
@@ -11,6 +13,7 @@ export default function TabLayout() {
         tabBarStyle: {
           backgroundColor: colors.background,
           borderTopColor: colors.surface,
+          borderTopWidth: 3,
         },
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.textSecondary,
@@ -21,7 +24,7 @@ export default function TabLayout() {
         options={{
           title: "Home",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
+            <HomeIcon width={size} height={size} color={color} />
           ),
         }}
       />
@@ -51,7 +54,7 @@ export default function TabLayout() {
         options={{
           title: "Tickets",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="ticket-outline" size={size} color={color} />
+            <TicketIcon width={size} height={size} color={color} />
           ),
         }}
       />

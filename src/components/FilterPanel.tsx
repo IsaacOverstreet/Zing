@@ -1,4 +1,5 @@
 import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
+import FilterIconVertical from "@/assets/images/hugeicons_filter-vertical.svg";
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { useResponsive } from "../utils/responsive";
@@ -67,10 +68,10 @@ export default function FilterPanel({
             }}
             className="items-center justify-center rounded-full border border-[#765097] bg-[#765097] shadow-black shadow-[0px_3px_0px]"
           >
-            <Ionicons
-              name="options-outline"
-              size={controlHeight(21)}
-              color="#FFFFFF"
+            <FilterIconVertical
+              width={controlHeight(21)}
+              height={controlHeight(21)}
+              color="#FFF9F5"
             />
           </Pressable>
         </View>

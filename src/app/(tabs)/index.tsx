@@ -1,11 +1,12 @@
 import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
+import FilterHorzontalBlack from "@/assets/images/filter-horizontal-black.svg";
+import FilterHorzontalWhite from "@/assets/images/filter-horizontal-white.svg";
 import EventCard from "@/src/components/EventCard";
 import FeaturedEvent from "@/src/components/FeaturedEvent";
 import FilterPanel from "@/src/components/FilterPanel";
 import HomePageContainer from "@/src/components/HomepageContainer";
 import SearchBar from "@/src/components/SearchBar";
 import { useResponsive } from "@/src/utils/responsive";
-import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { FlatList, Pressable, ScrollView, Text, View } from "react-native";
 
@@ -86,6 +87,11 @@ export default function Home() {
       ? events
       : events.filter((event) => event.category === selectedCategory);
 
+  const isFilterActive =
+    (selectedCategory !== "ALL" && selectedCategory !== "All") ||
+    selectedDate !== "Any date" ||
+    freeOnly;
+
   const toggleSaved = (eventId: string) => {
     setSavedEvents((current) =>
       current.includes(eventId)
@@ -139,7 +145,12 @@ export default function Home() {
 
               {/* Search */}
               <View className="mt-7 w-full flex-row items-center">
-                <SearchBar className="flex-1" placeholder="search" />
+                <SearchBar
+                  className="flex-1"
+                  placeholder="search"
+                  searchIconColor="#000000"
+                  placeholderTextColor="#000000"
+                />
 
                 <Pressable
                   onPress={() => setShowFilters(true)}
@@ -147,13 +158,23 @@ export default function Home() {
                     height: controlHeight(49),
                     width: controlHeight(49),
                   }}
-                  className="ml-2 items-center justify-center rounded-full border border-[#BDB9B7] bg-[#FFF9F5] shadow-black shadow-[0px_3px_0px]"
+                  className={`ml-2 items-center justify-center rounded-full border shadow-black shadow-[0px_3px_0px] ${
+                    isFilterActive
+                      ? "border-[#765097] bg-[#765097]"
+                      : "border-[#BDB9B7] bg-[#FFF9F5]"
+                  }`}
                 >
-                  <Ionicons
-                    name="options-outline"
-                    size={controlHeight(21)}
-                    color="#2D2927"
-                  />
+                  {isFilterActive ? (
+                    <FilterHorzontalWhite
+                      width={controlHeight(21)}
+                      height={controlHeight(21)}
+                    />
+                  ) : (
+                    <FilterHorzontalBlack
+                      width={controlHeight(21)}
+                      height={controlHeight(21)}
+                    />
+                  )}
                 </Pressable>
               </View>
 
