@@ -19,10 +19,12 @@ export default function FeaturedEvent({
   event,
   saved,
   onSave,
+  handleShare,
 }: {
   event: Event;
   saved: boolean;
   onSave: () => void;
+  handleShare: (event: Event) => void;
 }) {
   const { textSize, controlHeight, imageHeight } = useResponsive();
 
@@ -50,14 +52,16 @@ export default function FeaturedEvent({
             <Ionicons
               name={saved ? "heart" : "heart-outline"}
               size={controlHeight(16)}
-              color={saved ? "#765097" : "#2D2927"}
+              color={saved ? "#D20B0B" : "#2D2927"}
             />
           </Pressable>
 
           {/* Share */}
           <Pressable
             style={{ height: controlHeight(44), width: controlHeight(44) }}
-            className="absolute right-4 top-4 h-[44px] w-[44px] items-center justify-center rounded-full bg-[#FFF9F6]"
+            className="absolute  right-4 top-4 h-[44px] w-[44px] items-center justify-center rounded-full bg-[#FFF9F6]"
+
+            onPress={() => handleShare(event)}
           >
             <Ionicons
               name="share-outline"

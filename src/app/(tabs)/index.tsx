@@ -8,7 +8,14 @@ import HomePageContainer from "@/src/components/HomepageContainer";
 import SearchBar from "@/src/components/SearchBar";
 import { useResponsive } from "@/src/utils/responsive";
 import { useState } from "react";
-import { FlatList, Pressable, ScrollView, Text, View } from "react-native";
+import {
+  FlatList,
+  Pressable,
+  ScrollView,
+  Share,
+  Text,
+  View,
+} from "react-native";
 
 const categories = [
   "All",
@@ -98,6 +105,12 @@ export default function Home() {
         ? current.filter((id) => id !== eventId)
         : [...current, eventId],
     );
+  };
+
+  const handleShare = async (event: (typeof events)[number]) => {
+    await Share.share({
+      message: `Check out ${event.title}!\nDate: ${event.date}\nLocation: ${event.location}`,
+    });
   };
 
   return (
@@ -193,6 +206,7 @@ export default function Home() {
                 event={events[0]}
                 saved={savedEvents.includes(events[0].id)}
                 onSave={() => toggleSaved(events[0].id)}
+                handleShare={handleShare}
               />
 
               {/* Categories */}
@@ -220,7 +234,7 @@ export default function Home() {
                         key={category}
                         onPress={() => setSelectedCategory(category)}
                         style={{ height: controlHeight(29) }}
-                        className={`rounded-full justify-center border px-5 ${
+                        className={`rounded-full justify-center border  px-5 ${
                           selected
                             ? "border-[#765097] bg-[#765097]"
                             : "border-[#2D2927] bg-transparent"
@@ -250,6 +264,7 @@ export default function Home() {
               event={item}
               saved={savedEvents.includes(item.id)}
               onSave={() => toggleSaved(item.id)}
+              handleShare={handleShare}
             />
           )}
           ListEmptyComponent={
