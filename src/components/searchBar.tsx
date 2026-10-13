@@ -9,6 +9,8 @@ type searchBarProps = {
   setIsSearching?: (value: boolean) => void;
   className?: string;
   placeholder: string;
+  placeholderTextColor?: string;
+  searchIconColor?: string;
 };
 
 export default function SearchBar({
@@ -17,8 +19,10 @@ export default function SearchBar({
   setIsSearching = () => {},
   className,
   placeholder,
+  placeholderTextColor = "#B5B0AD",
+  searchIconColor = "#B5B0AD",
 }: searchBarProps) {
-  const { textSize, imageHeight, controlHeight, content } = useResponsive();
+  const { textSize, controlHeight } = useResponsive();
   return (
     <View className={` ${className} `}>
       <View
@@ -28,14 +32,14 @@ export default function SearchBar({
         className="w-full  border border-[#BDB9B7]  flex-row items-center rounded-full  b bg-[#FFF9F6]
         shadow-black shadow-[0px_3px_0px] px-8"
       >
-        <Ionicons name="search-outline" size={18} color="#B5B0AD" />
+        <Ionicons name="search-outline" size={18} color={searchIconColor} />
 
         <TextInput
           value={onSearch}
           onFocus={() => setIsSearching(true)}
           onChangeText={setSearch}
           placeholder={placeholder}
-          placeholderTextColor="#B5B0AD"
+          placeholderTextColor={placeholderTextColor}
           className="ml-2 flex-1"
           style={{
             fontFamily: fontFamily.regular,

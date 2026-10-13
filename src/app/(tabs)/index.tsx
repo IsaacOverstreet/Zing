@@ -1,22 +1,24 @@
 import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
-import AppContainer from "@/src/components/AppContainer";
 import EventCard from "@/src/components/EventCard";
 import FeaturedEvent from "@/src/components/FeaturedEvent";
+import FilterPanel from "@/src/components/FilterPanel";
 import HomePageContainer from "@/src/components/HomepageContainer";
 import SearchBar from "@/src/components/SearchBar";
 import { useResponsive } from "@/src/utils/responsive";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
-import {
-  FlatList,
-  Image,
-  Pressable,
-  ScrollView,
-  Text,
-  View,
-} from "react-native";
+import { FlatList, Pressable, ScrollView, Text, View } from "react-native";
 
-const categories = ["All", "Tech", "Music", "Career", "Sport"];
+const categories = [
+  "All",
+  "Tech",
+  "Music",
+  "Career",
+  "Sport",
+  "Ai",
+  "Arts",
+  "Health",
+];
 
 const events = [
   {
@@ -69,8 +71,15 @@ const events = [
 export default function Home() {
   const { textSize, content, controlHeight } = useResponsive();
 
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  // const [selectedCategory, setSelectedCategory] = useState("All");
   const [savedEvents, setSavedEvents] = useState<string[]>([]);
+  const [showFilters, setShowFilters] = useState<boolean>(false);
+
+  const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
+
+  const [selectedDate, setSelectedDate] = useState("Any date");
+
+  const [freeOnly, setFreeOnly] = useState(false);
 
   const filteredEvents =
     selectedCategory === "All"
@@ -129,15 +138,16 @@ export default function Home() {
               </Text>
 
               {/* Search */}
-              <View className="mt-7 flex-row items-center w-full">
+              <View className="mt-7 w-full flex-row items-center">
                 <SearchBar className="flex-1" placeholder="search" />
 
                 <Pressable
+                  onPress={() => setShowFilters(true)}
                   style={{
                     height: controlHeight(49),
                     width: controlHeight(49),
                   }}
-                  className="ml-2 items-center justify-center border border-[#BDB9B7] shadow-black shadow-[0px_3px_0px] bg-[#FFF9F5] rounded-full active:translate-y-1 active:shadow-[0px_2px_0px]"
+                  className="ml-2 items-center justify-center rounded-full border border-[#BDB9B7] bg-[#FFF9F5] shadow-black shadow-[0px_3px_0px]"
                 >
                   <Ionicons
                     name="options-outline"
@@ -213,6 +223,7 @@ export default function Home() {
               <View className="h-7" />
             </View>
           }
+
           renderItem={({ item }) => (
             <EventCard
               event={item}
@@ -233,84 +244,26 @@ export default function Home() {
             </View>
           }
         />
+
+        {/* Filter overlay */}
+        {showFilters && (
+          <FilterPanel
+            selectedCategory={selectedCategory}
+            selectedDate={selectedDate}
+            freeOnly={freeOnly}
+            onCategoryChange={setSelectedCategory}
+            onDateChange={setSelectedDate}
+            onFeeChange={setFreeOnly}
+            onReset={() => {
+              setSelectedCategory("ALL");
+              setSelectedDate("Any date");
+              setFreeOnly(false);
+            }}
+            onApply={() => setShowFilters(false)}
+            onClose={() => setShowFilters(false)}
+          />
+        )}
       </View>
     </HomePageContainer>
   );
 }
-
-/* Featured event */
-
-/* Regular event card */
-
-/* Bottom navigation */
-
-// function BottomNavigation() {
-//   const { textSize } = useResponsive();
-
-//   const items = [
-//     {
-//       label: "Home",
-//       icon: "home",
-//       active: true,
-//     },
-//     {
-//       label: "Explore",
-//       icon: "compass-outline",
-//       active: false,
-//     },
-//     {
-//       label: "Saved",
-//       icon: "heart-outline",
-//       active: false,
-//     },
-//     {
-//       label: "Tickets",
-//       icon: "ticket-outline",
-//       active: false,
-//     },
-//     {
-//       label: "Profile",
-//       icon: "person-outline",
-//       active: false,
-//     },
-//   ] as const;
-
-//   return (
-//     <View
-//       className="mx-[-20px] flex-row border-t border-[#2D2927] bg-[#FFF9F6] px-3 pb-2 pt-3"
-//       style={{
-//         shadowColor: "#000",
-//         shadowOffset: {
-//           width: 0,
-//           height: -2,
-//         },
-//         shadowOpacity: 0.05,
-//         shadowRadius: 4,
-//       }}
-//     >
-//       {items.map((item) => (
-//         <Pressable
-//           key={item.label}
-//           className="flex-1 items-center justify-center"
-//         >
-//           <Ionicons
-//             name={item.icon}
-//             size={24}
-//             color={item.active ? "#765097" : "#817B78"}
-//           />
-
-//           <Text
-//             className="mt-1"
-//             style={{
-//               fontFamily: fontFamily.medium,
-//               fontSize: textSize(11),
-//               color: item.active ? "#765097" : "#817B78",
-//             }}
-//           >
-//             {item.label}
-//           </Text>
-//         </Pressable>
-//       ))}
-//     </View>
-//   );
-// }
