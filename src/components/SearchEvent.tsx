@@ -1,8 +1,10 @@
+import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
 import BackRoute from "@/src/components/BackRoute";
 import SearchBar from "@/src/components/SearchBar";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
+import { useResponsive } from "../utils/responsive";
 import NoResultsFound from "./NoResultsFound";
 
 const events = [
@@ -18,6 +20,7 @@ type SearchEventProps = {
 };
 
 export default function SearchEvent({ setIsSearching }: SearchEventProps) {
+  const { textSize, content, controlHeight } = useResponsive();
   const [search, setSearch] = useState("");
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
 
@@ -28,15 +31,15 @@ export default function SearchEvent({ setIsSearching }: SearchEventProps) {
   );
 
   return (
-    <View className=" flex-1">
+    <View className="flex-1">
       {/* Search bar */}
-      <View className="relative w-full flex-row items-center justify-end ">
+      <View className="relative w-full flex-row items-center justify-end">
         <BackRoute onPress={() => setIsSearching(false)} />
 
         <SearchBar
           placeholder="Search for your event"
           setSearch={setSearch}
-          className="w-[97%]"
+          className="w-[90%]"
         />
       </View>
 
@@ -44,7 +47,13 @@ export default function SearchEvent({ setIsSearching }: SearchEventProps) {
       <View className="mt-6 ">
         {search.trim() === "" ? (
           <>
-            <Text className="mb-3 text-[14px] font-semibold text-[#2D2927]">
+            <Text
+              className="mb-3 text-[#2D2927]"
+              style={{
+                fontFamily: fontFamily.semiBold,
+                fontSize: textSize(14),
+              }}
+            >
               Popular Search
             </Text>
 
@@ -57,7 +66,13 @@ export default function SearchEvent({ setIsSearching }: SearchEventProps) {
                 <View className="flex-1 flex-row items-center">
                   <Ionicons name="time-outline" size={15} color="#2D2927" />
 
-                  <Text className="ml-3 text-[13px] text-[#2D2927]">
+                  <Text
+                    className="ml-3 text-[#2D2927]"
+                    style={{
+                      fontFamily: fontFamily.regular,
+                      fontSize: textSize(12),
+                    }}
+                  >
                     {event}
                   </Text>
                 </View>
@@ -81,7 +96,13 @@ export default function SearchEvent({ setIsSearching }: SearchEventProps) {
                 <View className="flex-1 flex-row items-center">
                   <Ionicons name="search-outline" size={18} color="#2D2927" />
 
-                  <Text className="ml-3 text-[13px] text-[#2D2927]">
+                  <Text
+                    className="ml-3 text-[#2D2927]"
+                    style={{
+                      fontFamily: fontFamily.regular,
+                      fontSize: textSize(12),
+                    }}
+                  >
                     {event}
                   </Text>
                 </View>

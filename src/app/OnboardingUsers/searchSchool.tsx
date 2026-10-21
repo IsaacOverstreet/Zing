@@ -1,5 +1,7 @@
+import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
 import BackRoute from "@/src/components/BackRoute";
 import SearchBar from "@/src/components/SearchBar";
+import { useResponsive } from "@/src/utils/responsive";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
@@ -16,6 +18,7 @@ type SearchSchoolProps = {
 };
 
 export default function SearchSchool({ setIsSearching }: SearchSchoolProps) {
+  const { textSize, content, controlHeight } = useResponsive();
   const [search, setSearch] = useState("");
   const [selectedSchool, setSelectedSchool] = useState<string | null>(null);
 
@@ -33,7 +36,7 @@ export default function SearchSchool({ setIsSearching }: SearchSchoolProps) {
         <SearchBar
           placeholder="search for school"
           setSearch={setSearch}
-          className="w-[97%]"
+          className="w-[90%]"
         />
       </View>
 
@@ -54,7 +57,12 @@ export default function SearchSchool({ setIsSearching }: SearchSchoolProps) {
                 <View className="flex-1 flex-row items-center">
                   <Ionicons name="search-outline" size={18} color="#B5B0AD" />
 
-                  <Text className="ml-3 text-[14px]">{school}</Text>
+                  <Text
+                    className="ml-3 text-[14px]"
+                    style={{ fontFamily: fontFamily.regular }}
+                  >
+                    {school}
+                  </Text>
                 </View>
 
                 {/* Selected indicator */}
