@@ -37,7 +37,7 @@ export default function HomePageContainer({
         className="relative flex-1 "
       >
         {/* content wrapper */}
-        <View className="relative flex-1 w-full max-w-[820px] justify-between bg-[#FFF9F6]">
+        <View className=" relative flex-1 w-full max-w-[820px] justify-between bg-[#FFF9F6]">
           {children}
         </View>
       </View>
