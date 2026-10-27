@@ -21,7 +21,7 @@ export default function CreateAccount() {
         {/* Main Card */}
         <View style={{ gap: content(30) }}>
           <View className="relative w-full  flex-row items-center gap-7 justify-center">
-            <BackRoute />
+            <BackRoute className="absolute left-0" />
 
             <Text
               style={{

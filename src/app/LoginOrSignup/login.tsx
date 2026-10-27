@@ -17,7 +17,7 @@ export default function Login() {
         <View style={{ gap: content(30) }}>
           <View style={{ gap: content(20) }} className="items-center ">
             <View className="relative w-full flex-row items-center justify-center">
-              <BackRoute />
+              <BackRoute className="absolute left-0" />
 
               <Text
                 style={{

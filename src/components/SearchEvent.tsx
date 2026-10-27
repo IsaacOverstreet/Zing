@@ -33,13 +33,13 @@ export default function SearchEvent({ setIsSearching }: SearchEventProps) {
   return (
     <View className="flex-1">
       {/* Search bar */}
-      <View className="relative w-full flex-row items-center justify-end">
+      <View className=" relative w-full  flex-row items-center justify-between ">
         <BackRoute onPress={() => setIsSearching(false)} />
 
         <SearchBar
           placeholder="Search for your event"
           setSearch={setSearch}
-          className="w-[90%]"
+          className="w-[95%]"
         />
       </View>
 
