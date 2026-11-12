@@ -1,16 +1,24 @@
+import { router } from "expo-router";
 import { create } from "zustand";
 
+type SearchType = "events" | "schools" | "users";
 type SearchStore = {
-  search: string;
-  setSearch: (value: string) => void;
-  selectedEvent: string | null;
+  searchQuery: string;
+  searchType: SearchType;
 
-  setSelectedEvent: (event: string | null) => void;
+  setSearchQuery: (value: string) => void;
+  setSearchType: (value: "events" | "schools" | "users") => void;
+  openSearchScreen: (type: SearchType) => void;
 };
 
 export const useSearchStore = create<SearchStore>((set) => ({
-  search: "",
-  setSearch: (value) => set({ search: value }),
-  selectedEvent: null,
-  setSelectedEvent: (value) => set({ selectedEvent: value }),
+  searchQuery: "",
+  searchType: "events",
+
+  openSearchScreen: (type) => {
+    set({ searchType: type, searchQuery: "" });
+    router.push("/SharedScreen/searchEventScreen");
+  },
+  setSearchQuery: (value) => set({ searchQuery: value }),
+  setSearchType: (value) => set({ searchType: value }),
 }));

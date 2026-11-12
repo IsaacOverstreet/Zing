@@ -8,6 +8,7 @@ export const colors = {
   text: "#ffffff",
   textSecondary: "#a0a0b0",
   alert: "#ff5252",
+  inactive: "#999999",
 };
 
 export const globalStyles = StyleSheet.create({

@@ -1,9 +1,13 @@
-import HomeIcon from "@/assets/images/home.svg";
 import TicketIcon from "@/assets/images/hugeicons_ticket-01.svg";
 import "@/global.css";
 import { colors } from "@/styles/global";
 import { Ionicons } from "@expo/vector-icons";
+import Feather from "@expo/vector-icons/Feather";
 import { Tabs } from "expo-router";
+import type { ColorValue } from "react-native";
+
+const toColor = (color: ColorValue): string =>
+  typeof color === "string" ? color : colors.inactive;
 
 export default function TabLayout() {
   return (
@@ -15,8 +19,8 @@ export default function TabLayout() {
           borderTopColor: colors.surface,
           borderTopWidth: 3,
         },
-        tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.textSecondary,
+        tabBarActiveTintColor: "#765097",
+        tabBarInactiveTintColor: "#999999",
       }}
     >
       <Tabs.Screen
@@ -24,7 +28,7 @@ export default function TabLayout() {
         options={{
           title: "Home",
           tabBarIcon: ({ color, size }) => (
-            <HomeIcon width={size} height={size} color={color} />
+            <Feather name="home" size={size} color={toColor(color)} />
           ),
         }}
       />
@@ -34,7 +38,11 @@ export default function TabLayout() {
         options={{
           title: "Explore",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="compass-outline" size={size} color={color} />
+            <Ionicons
+              name="compass-outline"
+              size={size}
+              color={toColor(color)}
+            />
           ),
         }}
       />
@@ -44,7 +52,7 @@ export default function TabLayout() {
         options={{
           title: "Saved",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="heart-outline" size={size} color={color} />
+            <Ionicons name="heart-outline" size={size} color={toColor(color)} />
           ),
         }}
       />
@@ -54,7 +62,7 @@ export default function TabLayout() {
         options={{
           title: "Tickets",
           tabBarIcon: ({ color, size }) => (
-            <TicketIcon width={size} height={size} color={color} />
+            <TicketIcon width={size} height={size} color={toColor(color)} />
           ),
         }}
       />
@@ -64,8 +72,20 @@ export default function TabLayout() {
         options={{
           title: "Profile",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-outline" size={size} color={color} />
+            <Ionicons
+              name="person-outline"
+              size={size}
+              color={toColor(color)}
+            />
           ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="search-event"
+        options={{
+          href: null,
+          headerShown: false,
         }}
       />
     </Tabs>

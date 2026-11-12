@@ -2,10 +2,12 @@ import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
 import BackRoute from "@/src/components/BackRoute";
 import SearchBar from "@/src/components/SearchBar";
 import { Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable, Text, View } from "react-native";
+import { useSearchStore } from "../store/searchStore";
 import { useResponsive } from "../utils/responsive";
 import NoResultsFound from "./NoResultsFound";
+import { router } from "expo-router";
 
 const events = [
   "Debate competition",
@@ -15,11 +17,11 @@ const events = [
   "Debanter competition 2026",
 ];
 
-type SearchEventProps = {
-  setIsSearching: (value: boolean) => void;
-};
+// type SearchEventProps = {
+//   setShowSearchScreen: (value: boolean) => void;
+// };
 
-export default function SearchEvent({ setIsSearching }: SearchEventProps) {
+export default function SearchEvent() {
   const { textSize, content, controlHeight } = useResponsive();
   const [search, setSearch] = useState("");
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
@@ -29,18 +31,60 @@ export default function SearchEvent({ setIsSearching }: SearchEventProps) {
   const filteredEvents = events.filter((event) =>
     event.toLowerCase().includes(search.toLowerCase().trim()),
   );
+  //  // Get values from Zustand
+  //   const searchQuery = useSearchStore((state) => state.searchQuery);
+  //   const searchType = useSearchStore((state) => state.searchType);
+
+  //   // Local state for API results and loading
+  //   const [results, setResults] = useState<any[]>([]);
+  //   const [loading, setLoading] = useState(false);
+  //   const [error, setError] = useState("");
+
+  //   // Fetch results whenever the query or search type changes
+  //   useEffect(() => {
+  //     const query = searchQuery.trim();
+
+  //     if (!query) {
+  //       setResults([]);
+  //       return;
+  //     }
+
+  //     const fetchResults = async () => {
+  //       try {
+  //         setLoading(true);
+  //         setError("");
+
+  //         const response = await fetch(
+  //           `${API_URL}/${searchType}/search?q=${encodeURIComponent(query)}`
+  //         );
+
+  //         if (!response.ok) {
+  //           throw new Error("Failed to fetch search results");
+  //         }
+
+  //         const data = await response.json();
+  //         setResults(data);
+  //       } catch (err) {
+  //         setError("Something went wrong. Please try again.");
+  //         setResults([]);
+  //       } finally {
+  //         setLoading(false);
+  //       }
+  //     };
+
+  //     // Wait 400ms after the user stops typing before making the request
+  //     const timeout = setTimeout(fetchResults, 400);
+
+  //     return () => clearTimeout(timeout);
+  //   }, [searchQuery, searchType]);
 
   return (
     <View className="flex-1">
       {/* Search bar */}
-      <View className=" relative w-full  flex-row items-center justify-between ">
-        <BackRoute onPress={() => setIsSearching(false)} />
+      <View className=" relative w-full  flex-row items-center gap-5">
+        <BackRoute onPress={router.back} />
 
-        <SearchBar
-          placeholder="Search for your event"
-          setSearch={setSearch}
-          className="w-[95%]"
-        />
+        <SearchBar placeholder="Search for your event" />
       </View>
 
       {/* Popular Search / Search Results */}

@@ -1,12 +1,10 @@
 import { fontFamily } from "@/assets/fonts_dimensions/fontsFamily";
-import FilterHorzontalBlack from "@/assets/images/filter-horizontal-black.svg";
-import FilterHorzontalWhite from "@/assets/images/filter-horizontal-white.svg";
 import EventCard from "@/src/components/EventCard";
 import FeaturedEvent from "@/src/components/FeaturedEvent";
 import FilterPanel from "@/src/components/FilterPanel";
 import HomePageContainer from "@/src/components/HomepageContainer";
-import SearchBar from "@/src/components/SearchBar";
-import SearchEvent from "@/src/components/SearchEvent";
+import SearchTriggerAndFilter from "@/src/components/SearchTriggerAndFilter";
+import { useSearchStore } from "@/src/store/searchStore";
 import { useResponsive } from "@/src/utils/responsive";
 import { useState } from "react";
 import {
@@ -90,9 +88,6 @@ export default function Home() {
 
   const [freeOnly, setFreeOnly] = useState(false);
 
-  const [showSearch, setShowSearch] = useState(false);
-  const [isSearching, setIsSearching] = useState(false);
-
   const filteredEvents =
     selectedCategory === "All"
       ? events
@@ -117,198 +112,171 @@ export default function Home() {
     });
   };
 
+  const openSearchScreen = useSearchStore((state) => state.openSearchScreen);
+
   return (
     <HomePageContainer>
-      {isSearching ? (
-        <SearchEvent setIsSearching={setIsSearching} />
-      ) : (
-        <View className="flex-1 ">
-          {/* Main content */}
-          <FlatList
-            data={filteredEvents}
-            keyExtractor={(item) => item.id}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{
-              paddingBottom: content(20),
-            }}
-            ListHeaderComponent={
-              <View>
-                {/* University */}
-                <View
-                  style={{
-                    height: controlHeight(22),
-                    paddingHorizontal: controlHeight(10),
-                  }}
-                  className="self-start justify-center rounded-full bg-[#F2B94B]"
-                >
-                  <Text
-                    style={{
-                      fontFamily: fontFamily.medium,
-                      fontSize: textSize(8),
-                    }}
-                  >
-                    FEDERAL UNIVERSITY OF AGRICULTURE, ABEOKUTA
-                  </Text>
-                </View>
-
-                {/* Greeting */}
+      <View className="flex-1 ">
+        {/* Main content */}
+        <FlatList
+          data={filteredEvents}
+          keyExtractor={(item) => item.id}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingBottom: content(20),
+          }}
+          ListHeaderComponent={
+            <View>
+              {/* University */}
+              <View
+                style={{
+                  height: controlHeight(22),
+                  paddingHorizontal: controlHeight(10),
+                }}
+                className="self-start justify-center rounded-full bg-[#F2B94B]"
+              >
                 <Text
-                  className="mt-7"
                   style={{
                     fontFamily: fontFamily.medium,
-                    fontSize: textSize(16),
-                    lineHeight: textSize(25),
+                    fontSize: textSize(8),
                   }}
                 >
-                  Hey, Dolapo! Tell us what you want to do today
+                  FEDERAL UNIVERSITY OF AGRICULTURE, ABEOKUTA
                 </Text>
-
-                {/* Search */}
-                <View className="mt-7 w-full flex-row items-center">
-                  <SearchBar
-                    setIsSearching={() => setIsSearching(true)}
-                    className="flex-1"
-                    placeholder="search"
-                    searchIconColor="#000000"
-                    placeholderTextColor="#000000"
-                  />
-
-                  <Pressable
-                    onPress={() => setShowFilters(true)}
-                    style={{
-                      height: controlHeight(49),
-                      width: controlHeight(49),
-                    }}
-                    className={`ml-2 items-center justify-center rounded-full border shadow-black shadow-[0px_3px_0px] ${
-                      isFilterActive
-                        ? "border-[#765097] bg-[#765097]"
-                        : "border-[#BDB9B7] bg-[#FFF9F5]"
-                    }`}
-                  >
-                    {isFilterActive ? (
-                      <FilterHorzontalWhite
-                        width={controlHeight(21)}
-                        height={controlHeight(21)}
-                      />
-                    ) : (
-                      <FilterHorzontalBlack
-                        width={controlHeight(21)}
-                        height={controlHeight(21)}
-                      />
-                    )}
-                  </Pressable>
-                </View>
-
-                {/* Featured */}
-                <Text
-                  className="mt-8"
-                  style={{
-                    fontFamily: fontFamily.medium,
-                    fontSize: textSize(16),
-                  }}
-                >
-                  Featured
-                </Text>
-
-                <FeaturedEvent
-                  event={events[0]}
-                  saved={savedEvents.includes(events[0].id)}
-                  onSave={() => toggleSaved(events[0].id)}
-                  handleShare={handleShare}
-                />
-
-                {/* Categories */}
-                <Text
-                  className="mt-7"
-                  style={{
-                    fontFamily: fontFamily.medium,
-                    fontSize: textSize(16),
-                  }}
-                >
-                  Categories
-                </Text>
-
-                <ScrollView
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  className="mt-4"
-                >
-                  <View className="flex-row gap-2">
-                    {categories.map((category) => {
-                      const selected = selectedCategory === category;
-
-                      return (
-                        <Pressable
-                          key={category}
-                          onPress={() => setSelectedCategory(category)}
-                          style={{ height: controlHeight(29) }}
-                          className={`rounded-full justify-center border  px-5 ${
-                            selected
-                              ? "border-[#765097] bg-[#765097]"
-                              : "border-[#2D2927] bg-transparent"
-                          }`}
-                        >
-                          <Text
-                            style={{
-                              fontFamily: fontFamily.regular,
-                              fontSize: textSize(12),
-                              color: selected ? "#FFF9F6" : "#2D2927",
-                            }}
-                          >
-                            {category}
-                          </Text>
-                        </Pressable>
-                      );
-                    })}
-                  </View>
-                </ScrollView>
-
-                <View className="h-7" />
               </View>
-            }
 
-            renderItem={({ item }) => (
-              <EventCard
-                event={item}
-                saved={savedEvents.includes(item.id)}
-                onSave={() => toggleSaved(item.id)}
+              {/* Greeting */}
+              <Text
+                className="mt-7"
+                style={{
+                  fontFamily: fontFamily.medium,
+                  fontSize: textSize(16),
+                  lineHeight: textSize(25),
+                }}
+              >
+                Hey, Dolapo! Tell us what you want to do today
+              </Text>
+
+              {/* Search */}
+              <SearchTriggerAndFilter
+                onpress={() => openSearchScreen("events")}
+                showFilterPanel={() => setShowFilters(true)}
+                isFilterPanleActive={isFilterActive}
+              />
+
+              {/* Featured */}
+              <Text
+                className="mt-8"
+                style={{
+                  fontFamily: fontFamily.medium,
+                  fontSize: textSize(16),
+                }}
+              >
+                Featured
+              </Text>
+
+              <FeaturedEvent
+                event={events[0]}
+                saved={savedEvents.includes(events[0].id)}
+                onSave={() => toggleSaved(events[0].id)}
                 handleShare={handleShare}
               />
-            )}
-            ListEmptyComponent={
-              <View className="items-center py-10">
-                <Text
-                  style={{
-                    fontFamily: fontFamily.regular,
-                    fontSize: textSize(14),
-                  }}
-                >
-                  No events found
-                </Text>
-              </View>
-            }
-          />
 
-          {/* Filter overlay */}
-          {showFilters && (
-            <FilterPanel
-              selectedCategory={selectedCategory}
-              selectedDate={selectedDate}
-              freeOnly={freeOnly}
-              onCategoryChange={setSelectedCategory}
-              onDateChange={setSelectedDate}
-              onFeeChange={setFreeOnly}
-              onReset={() => {
-                setSelectedCategory("ALL");
-                setSelectedDate("Any date");
-                setFreeOnly(false);
-              }}
-              onApply={() => setShowFilters(false)}
-              onClose={() => setShowFilters(false)}
+              {/* Categories */}
+              <Text
+                className="mt-7"
+                style={{
+                  fontFamily: fontFamily.medium,
+                  fontSize: textSize(16),
+                }}
+              >
+                Categories
+              </Text>
+
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                className="mt-4"
+              >
+                <View className="flex-row gap-2">
+                  {categories.map((category) => {
+                    const selected = selectedCategory === category;
+
+                    return (
+                      <Pressable
+                        key={category}
+                        onPress={() => setSelectedCategory(category)}
+                        style={{
+                          paddingHorizontal: 16,
+                          paddingVertical: 9,
+                        }}
+
+                        className={`rounded-full justify-center border  px-5 ${
+                          selected
+                            ? "border-[#765097] bg-[#765097]"
+                            : "border-[#000000] bg-transparent"
+                        }`}
+                      >
+                        <Text
+                          style={{
+                            fontFamily: fontFamily.regular,
+                            fontSize: textSize(12),
+                            color: selected ? "#FFF9F6" : "#2D2927",
+                          }}
+                        >
+                          {category}
+                        </Text>
+                      </Pressable>
+                    );
+                  })}
+                </View>
+              </ScrollView>
+
+              <View className="h-7" />
+            </View>
+          }
+
+          renderItem={({ item }) => (
+            <EventCard
+              event={item}
+              saved={savedEvents.includes(item.id)}
+              onSave={() => toggleSaved(item.id)}
+              handleShare={handleShare}
             />
           )}
-        </View>
-      )}
+          ListEmptyComponent={
+            <View className="items-center py-10">
+              <Text
+                style={{
+                  fontFamily: fontFamily.regular,
+                  fontSize: textSize(14),
+                }}
+              >
+                No events found
+              </Text>
+            </View>
+          }
+        />
+
+        {/* Filter overlay */}
+        {showFilters && (
+          <FilterPanel
+            selectedCategory={selectedCategory}
+            selectedDate={selectedDate}
+            freeOnly={freeOnly}
+            onCategoryChange={setSelectedCategory}
+            onDateChange={setSelectedDate}
+            onFeeChange={setFreeOnly}
+            onReset={() => {
+              setSelectedCategory("ALL");
+              setSelectedDate("Any date");
+              setFreeOnly(false);
+            }}
+            onApply={() => setShowFilters(false)}
+            onClose={() => setShowFilters(false)}
+          />
+        )}
+      </View>
     </HomePageContainer>
   );
 }
